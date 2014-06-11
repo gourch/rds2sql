@@ -1,0 +1,51 @@
+library common;
+
+modeltype sql uses genericsql('http://genericsql/1.0');
+
+mapping inout Field::int()
+when {
+	self.type = Type::int
+}
+{
+	self.specificType := self.type.toString().toUpperCase();
+}
+
+mapping inout Field::boolean()
+when {
+	self.type = Type::boolean
+}
+{
+	self.specificType := self.type.toString().toUpperCase();
+}
+
+mapping inout Field::date()
+when {
+	self.type = Type::date
+}
+{
+	self.specificType := self.type.toString().toUpperCase();
+}
+
+mapping inout Field::double()
+when {
+	self.type = Type::double
+}
+{
+	self.specificType := 'REAL';
+}
+
+mapping inout Field::varchar()
+when {
+	self.type = Type::varchar
+}
+{
+	if (self.size <= 0) then
+	{	
+		self.specificType := (self.type.toString() + '(' + '50' + ')').toUpperCase();
+	}
+	else
+	{
+		self.specificType := (self.type.toString() + '(' + self.size.toString() + ')').toUpperCase();
+	}
+	endif;
+}

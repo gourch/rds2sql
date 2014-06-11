@@ -1,0 +1,29 @@
+import common;
+
+modeltype sql uses genericsql('http://genericsql/1.0');
+
+transformation postgresql(inout model : sql);
+
+main() 
+{
+	model.objects()[Field]->map vendorType();
+}
+
+mapping inout Field::vendorType()
+disjuncts
+	Field::int,
+	Field::boolean,
+	Field::byteArray,
+	Field::date,
+	Field::double,
+	Field::varchar
+{	
+}
+
+mapping inout Field::byteArray()
+when {
+	self.type = Type::byteArray
+}
+{
+	self.specificType := 'BYTEA';
+}

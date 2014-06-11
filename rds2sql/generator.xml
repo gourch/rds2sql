@@ -1,0 +1,33 @@
+<generator>
+	<name>rds2sql</name>
+	<ifcontainskey name="MYSQL">
+		<then>
+			<m2m name="mysql.qvto" />
+		</then>
+		<else>
+			<ifcontainskey name="POSTGRESQL">
+				<then>
+					<m2m name="postgresql.qvto" />
+				</then>
+				<else>
+					<ifcontainskey name="H2DB">
+						<then>
+							<m2m name="h2db.qvto" />
+						</then>
+						<else>
+							<ifcontainskey name="ORACLE">
+								<then>
+									<m2m name="oracle.qvto" />
+								</then>
+								<else>
+									<m2m name="sql.qvto" />
+								</else>
+							</ifcontainskey>
+						</else>
+					</ifcontainskey>
+				</else>
+			</ifcontainskey>
+		</else>
+	</ifcontainskey>
+	<m2t name="rds2Sql/sql.mtl" bypass="false" />
+</generator>

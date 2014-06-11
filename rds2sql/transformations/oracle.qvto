@@ -1,0 +1,53 @@
+import common;
+
+modeltype sql uses genericsql('http://genericsql/1.0');
+
+transformation oracle(inout model : sql);
+
+main() 
+{
+	model.objects()[Field]->map vendorType();
+}
+
+mapping inout Field::vendorType()
+disjuncts
+	Field::int,
+	Field::boolean,
+	Field::byteArray,
+	Field::date,
+	Field::double,
+	Field::varchar2
+{	
+}
+
+mapping inout Field::byteArray()
+when {
+	self.type = Type::byteArray
+}
+{
+	if (self.size > 0) then
+	{	
+		self.specificType := 'BLOB' + '(' + self.size.toString() + ')';
+	}
+	else
+	{
+		self.specificType := 'BLOB';
+	}
+	endif;
+}
+
+mapping inout Field::varchar2()
+when {
+	self.type = Type::varchar
+}
+{
+	if (self.size <= 0) then
+	{	
+		self.specificType := (self.type.toString() + '2' + '(' + '50' + ')').toUpperCase();
+	}
+	else
+	{
+		self.specificType := (self.type.toString() + '2' + '(' + self.size.toString() + ')').toUpperCase();
+	}
+	endif;
+}
