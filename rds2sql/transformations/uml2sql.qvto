@@ -29,7 +29,7 @@ mapping Property::toField() : Field
 disjuncts Property::toSizeField, Property::toGeneralField
 {}
 
-mapping Property::toGeneralField() : Field
+abstract mapping Property::toCommonField() : Field
 {
 	name := self.name;
 	type := self.translate();
@@ -37,7 +37,13 @@ mapping Property::toGeneralField() : Field
 	unique := self.isUnique;
 }
 
+mapping Property::toGeneralField() : Field
+inherits Property::toCommonField
+{
+}
+
 mapping Property::toSizeField() : Field
+inherits Property::toCommonField
 when {
 	self.type.name = 'String' or self.type.name = 'ByteArray'
 }
