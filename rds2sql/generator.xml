@@ -1,6 +1,5 @@
 <generator>
 	<name>rds2sql</name>
-	<serializemodel name="output/uml.xmi" />
 	<m2m name="uml2sql.qvto" />
 	<ifcontainskey name="MYSQL">
 		<then>
