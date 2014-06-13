@@ -51,6 +51,10 @@
         <element xmi:type="ecore:EEnumLiteral" href="genericSql.ecore#//Type/varchar"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_2SWJUephEeO9AYZjWzATAg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_DY8VUPF3EeONRLTDeG7qbQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="genericSql.ecore#//Type/undefined"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DY8VUfF3EeONRLTDeG7qbQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_zsDcguphEeO9AYZjWzATAg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_zsDcg-phEeO9AYZjWzATAg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_zsDchOphEeO9AYZjWzATAg"/>
@@ -245,7 +249,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_sxWpUOpjEeO9AYZjWzATAg" type="3002" source="_GfQc0OpiEeO9AYZjWzATAg" target="_KeUTYOpiEeO9AYZjWzATAg">
     <children xmi:type="notation:Node" xmi:id="_sxWpVOpjEeO9AYZjWzATAg" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_sxWpVepjEeO9AYZjWzATAg" x="-29" y="25"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_sxWpVepjEeO9AYZjWzATAg" x="6" y="24"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_sxXQYOpjEeO9AYZjWzATAg" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_sxXQYepjEeO9AYZjWzATAg" x="2" y="-14"/>
@@ -253,9 +257,9 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_sxWpUepjEeO9AYZjWzATAg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_sxWpUupjEeO9AYZjWzATAg" fontColor="4210752" fontName="Ubuntu" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="genericSql.ecore#//DataBase/tables"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_sxWpU-pjEeO9AYZjWzATAg" points="[5, 17, 1, -88]$[5, 102, 1, -3]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_sxZFkOpjEeO9AYZjWzATAg" id="(0.40487804878048783,0.9846153846153847)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_sxZFkepjEeO9AYZjWzATAg" id="(0.5294117647058824,0.0)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_sxWpU-pjEeO9AYZjWzATAg" points="[7, 1, 0, -85]$[7, 41, 0, -45]$[7, 86, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Ue6z8PLZEeOJ_JsO7CWNWw" id="(0.40487804878048783,0.9846153846153847)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Ue6z8fLZEeOJ_JsO7CWNWw" id="(0.5294117647058824,0.0)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_R2ESIOpkEeO9AYZjWzATAg" type="3002" source="_KeUTYOpiEeO9AYZjWzATAg" target="_Q-bxcOpiEeO9AYZjWzATAg">
     <children xmi:type="notation:Node" xmi:id="_R2E5MOpkEeO9AYZjWzATAg" type="4011">
@@ -364,7 +368,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Vw658eprEeO9AYZjWzATAg" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Vw658uprEeO9AYZjWzATAg" fontColor="4210752" fontName="Ubuntu" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="genericSql.ecore#//Field/entity"/>
+    <element xmi:type="ecore:EReference" href="genericSql.ecore#//Field/table"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Vw658-prEeO9AYZjWzATAg" points="[-12, 0, 0, 158]$[-12, -155, 0, 3]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Vw99QOprEeO9AYZjWzATAg" id="(0.3611111111111111,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_aAi8EOprEeO9AYZjWzATAg" id="(0.47058823529411764,0.9285714285714286)"/>
@@ -440,5 +444,19 @@
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oEm28-vPEeOLN4Zp6znQcQ" points="[50, -5, -130, 279]$[140, -5, -40, 279]$[140, -277, -40, 7]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_oEp6QOvPEeOLN4Zp6znQcQ" id="(0.8,0.8923076923076924)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_X4N88PLXEeOLVP-ijY9Dyw" type="3002" source="_KeUTYOpiEeO9AYZjWzATAg" target="_GfQc0OpiEeO9AYZjWzATAg">
+    <children xmi:type="notation:Node" xmi:id="_X4OkAPLXEeOLVP-ijY9Dyw" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_X4OkAfLXEeOLVP-ijY9Dyw" x="-15" y="41"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_X4PLEPLXEeOLVP-ijY9Dyw" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_X4PLEfLXEeOLVP-ijY9Dyw" y="-8"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_X4N88fLXEeOLVP-ijY9Dyw" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_X4N88vLXEeOLVP-ijY9Dyw" fontColor="4210752" fontName="Ubuntu" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="genericSql.ecore#//Table/database"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_X4N88_LXEeOLVP-ijY9Dyw" points="[0, 0, 7, 86]$[0, -45, 7, 41]$[0, -85, 7, 1]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3trSoPLXEeOLVP-ijY9Dyw" id="(0.5294117647058824,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3trSofLXEeOLVP-ijY9Dyw" id="(0.40487804878048783,0.9846153846153847)"/>
   </edges>
 </notation:Diagram>
