@@ -16,3 +16,4 @@ tasks/
 *.java
 *.emtl
 *.xmi
+*.log
