@@ -7,12 +7,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Type">
     <eLiterals name="int"/>
-    <eLiterals name="boolean" value="1"/>
-    <eLiterals name="byteArray" value="2"/>
-    <eLiterals name="date" value="3"/>
-    <eLiterals name="double" value="4"/>
-    <eLiterals name="varchar" value="5"/>
-    <eLiterals name="undefined" value="6"/>
+    <eLiterals name="bigInt" value="1"/>
+    <eLiterals name="boolean" value="2"/>
+    <eLiterals name="byteArray" value="3"/>
+    <eLiterals name="date" value="4"/>
+    <eLiterals name="double" value="5"/>
+    <eLiterals name="varchar" value="6"/>
+    <eLiterals name="undefined" value="7"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataBase" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="tables" lowerBound="1"

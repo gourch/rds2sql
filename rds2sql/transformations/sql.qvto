@@ -12,6 +12,7 @@ main()
 mapping inout Field::vendorType()
 disjuncts
 	Field::int,
+	Field::bigInt,
 	Field::boolean,
 	Field::byteArray,
 	Field::date,

@@ -191,6 +191,7 @@ property typeMap : Dict(String,sql::Type) =
         'Boolean'	= sql::Type::boolean,
         'ByteArray'	= sql::Type::byteArray,
         'Date'		= sql::Type::date,
+        'Long'		= sql::Type::bigInt,
         'Real'		= sql::Type::double,
         'String'	= sql::Type::varchar
     };

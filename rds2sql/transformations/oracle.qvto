@@ -12,6 +12,7 @@ main()
 mapping inout Field::vendorType()
 disjuncts
 	Field::int,
+	Field::bigInt,
 	Field::boolean,
 	Field::byteArray,
 	Field::date,
@@ -50,4 +51,12 @@ when {
 		self.specificType := (self.type.toString() + '2' + '(' + self.size.toString() + ')').toUpperCase();
 	}
 	endif;
+}
+
+mapping inout Field::bigInt()
+when {
+	self.type = Type::bigInt
+}
+{
+	self.specificType := 'NUMBER';
 }

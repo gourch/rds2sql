@@ -31,6 +31,10 @@
         <element xmi:type="ecore:EEnumLiteral" href="genericSql.ecore#//Type/int"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_0phxYephEeO9AYZjWzATAg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_OkqNEPUrEeO0246rfgTB1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="genericSql.ecore#//Type/bigInt"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OkqNEfUrEeO0246rfgTB1Q"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_W2Mm4O1TEeO1PPP03O8dgw" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="genericSql.ecore#//Type/boolean"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_W2Mm4e1TEeO1PPP03O8dgw"/>

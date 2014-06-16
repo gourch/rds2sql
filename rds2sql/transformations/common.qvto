@@ -10,6 +10,15 @@ when {
 	self.specificType := self.type.toString().toUpperCase();
 }
 
+mapping inout Field::bigInt()
+when {
+	self.type = Type::bigInt
+}
+{
+	self.specificType := self.type.toString().toUpperCase();
+}
+
+
 mapping inout Field::boolean()
 when {
 	self.type = Type::boolean
