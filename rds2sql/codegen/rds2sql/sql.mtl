@@ -22,7 +22,7 @@
 -- [t.comment/]
 CREATE TABLE [t.name/]
 (
-[for (f : Field | t.fields)]
+[for (f : Field | t.fields->select(type <> Type::undefined))]
 	[f.genField()/]
 [/for]
 	[t.primaryKey.genPrimaryKey()/]
@@ -41,9 +41,10 @@ PRIMARY KEY([for (f : Field | k.primaryFields) separator(', ')][f.name/][/for])
 [template public genForeignKey(t : Table)]
 [for (k : ForeignKey | t.foreignKeys) separator('; \n')]
 ALTER TABLE [t.name/]
-	ADD CONSTRAINT [if (k.name.isValid())][k.name/][else]fk_[k.refersTo.table.name/]_[for (f : Field | k.foreignFields) separator('_')][f.name/][/for]_[t.name/][/if]
+	ADD CONSTRAINT [if (k.name.isValid())][k.name/][else]fk_[t.name/]_[for (f : Field | k.foreignFields) separator('_')][f.name/][/for]_[k.refersTo.table.name/][/if]
 		FOREIGN KEY([for (f : Field | k.foreignFields) separator(',')][f.name/][/for])
 			REFERENCES [k.refersTo.table.name/]([for (f : Field | k.refersTo.primaryFields) separator(',')][f.name/][/for])[/for];
+
 [/template]
 
 [query public isValid(n : String) : Boolean =

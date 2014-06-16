@@ -50,7 +50,7 @@ when {
 {
 	if (self.size <= 0) then
 	{	
-		self.specificType := (self.type.toString() + '(' + '50' + ')').toUpperCase();
+		self.specificType := (self.type.toString() + '(' + '100' + ')').toUpperCase();
 	}
 	else
 	{
