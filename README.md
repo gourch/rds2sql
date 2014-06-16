@@ -10,8 +10,8 @@ After the generation the UML element will be translate as below:
 - Multiplicity/cardinality -> cardinality.
 - UML types -> SQL types.
 
-- Preconditions :
-  1. The first attribute in the class is the primary key.
+Preconditions :
+- The first attribute in the class is the primary key.
 
 
 ## Example to use with genmymodel
