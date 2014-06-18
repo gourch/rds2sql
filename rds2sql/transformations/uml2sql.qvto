@@ -21,28 +21,30 @@ mapping Package::toDataBase() : DataBase
 mapping Class::toTable() : Table
 {
 	name := self.name;
-	primaryKey := self.ownedAttribute->at(1).map toPrimaryKey();
-	fields += self.ownedAttribute->map toField();
+	primaryKey := self.ownedAttribute->at(1).map toPrimaryKey(self.ownedAttribute->at(1).name);
+	self.ownedAttribute->forEach(att) {
+		fields += att->map toField(att.name);
+	}
 }
 
-mapping Property::toField() : Field
+mapping Property::toField(s :String) : Field
 disjuncts Property::toSizeField, Property::toGeneralField
 {}
 
-abstract mapping Property::toCommonField() : Field
+abstract mapping Property::toCommonField(s :String) : Field
 {
-	name := self.name;
+	name := s;
 	type := self.translate();
 	notNull := self.lower > 0;
 	unique := self.isUnique;
 }
 
-mapping Property::toGeneralField() : Field
+mapping Property::toGeneralField(s :String) : Field
 inherits Property::toCommonField
 {
 }
 
-mapping Property::toSizeField() : Field
+mapping Property::toSizeField(s :String) : Field
 inherits Property::toCommonField
 when {
 	self.type.name = 'String' or self.type.name = 'ByteArray' or self.type.name = 'Char'
@@ -55,22 +57,26 @@ when {
 	endif;
 }
 
-mapping Property::toPrimaryKey() : PrimaryKey
+mapping Property::toPrimaryKey(s : String) : PrimaryKey
 {
 	name := self._class.name;
-	primaryFields := self.map toField();
+	primaryFields := self.map toField(s);
 }
 
-mapping Association::toPrimaryKey(t : Table, pk1 : Property, pk2 : Property) : PrimaryKey
+mapping Association::toPrimaryKey(t : Table) : PrimaryKey
 when
 {
 	(self.ownedEnd->at(1).upperBound() < 0 and self.ownedEnd->at(1).getOtherEnd().upperBound() < 0)
 }
 {
+	var propRef := self.ownedEnd->at(1);
+	var pk1 := propRef.type![Class]->ownedAttribute->at(1);
+	var pk2 := propRef.getOtherEnd().type![Class]->ownedAttribute->at(1);
+	
 	name := t.name;
 	table := t;
-	primaryFields += pk1.map toField();
-	primaryFields += pk2.map toField();
+	primaryFields += pk1.map toField(propRef.name+'_'+pk1.name);
+	primaryFields += pk2.map toField(propRef.getOtherEnd().name+'_'+pk2.name);
 }
 
 mapping Association::toForeignKeys() : ForeignKey
@@ -93,10 +99,11 @@ when
 		else
 			self.ownedEnd->at(1)
 		endif;
-		
-	refersTo :=  propRef.type![Class]->ownedAttribute->at(1).map toPrimaryKey();
+	
+	var attribute := propRef.type![Class]->ownedAttribute->at(1);
+	refersTo :=  attribute.map toPrimaryKey(attribute.name);
 	table :=  propRef.getOtherEnd().type![Class].map toTable();
-	foreignFields += propRef.map toForeignField(table);
+	foreignFields += propRef.map toForeignField(table,propRef.name+'_'+attribute.name);
 	name := propRef.name;
 }
 
@@ -115,9 +122,10 @@ when
 			self.ownedEnd->at(1)
 		endif;
 	
-	refersTo :=  propRef.type![Class]->ownedAttribute->at(1).map toPrimaryKey();
+	var attribute := propRef.type![Class]->ownedAttribute->at(1);
+	refersTo :=  attribute.map toPrimaryKey(attribute.name);
 	table :=  propRef.getOtherEnd().type![Class].map toTable();
-	foreignFields += propRef.map toForeignField(table);
+	foreignFields += propRef.map toForeignField(table,propRef.name+'_'+attribute.name);
 	name := propRef.name;
 }
 
@@ -127,21 +135,21 @@ when
 	(self.ownedEnd->at(1).upperBound() < 0 and self.ownedEnd->at(1).getOtherEnd().upperBound() < 0)
 }
 {	
-	var propRef := self.ownedEnd->at(1);
-	
+	var propRef := self.ownedEnd->at(1);	
 	object ForeignKey
 	{
-		refersTo :=  propRef.type![Class]->ownedAttribute->at(1).map toPrimaryKey();
+		var attribute := propRef.type![Class]->ownedAttribute->at(1);
+		refersTo :=  attribute.map toPrimaryKey(attribute.name);
 		table :=  t;
-		foreignFields := propRef.map toForeignField(t);
+		foreignFields := propRef.map toForeignField(t,propRef.name+'_'+attribute.name);
 		name := propRef.name;
 	};	
-	
 	object ForeignKey
 	{
-		refersTo :=  propRef.getOtherEnd().type![Class]->ownedAttribute->at(1).map toPrimaryKey();
+		var attribute := propRef.getOtherEnd().type![Class]->ownedAttribute->at(1);
+		refersTo :=  attribute.map toPrimaryKey(attribute.name);
 		table :=  t;
-		foreignFields := propRef.getOtherEnd().map toForeignField(t);
+		foreignFields := propRef.getOtherEnd().map toForeignField(t,propRef.getOtherEnd().name+'_'+attribute.name);
 		name := propRef.getOtherEnd().name;
 	}; 
 }
@@ -153,26 +161,23 @@ when
 }
 {
 	var propRef := self.ownedEnd->at(1);
-	var pk1 := propRef.type![Class]->ownedAttribute->at(1);
-	var pk2 := propRef.getOtherEnd().type![Class]->ownedAttribute->at(1);
 	
 	database := umlModel.objects()![Model].map toDataBase();
 	name := propRef.type![Class].name + '_' + propRef.getOtherEnd().type![Class].name;
-	self.map toPrimaryKey(result, pk1, pk2);
+	self.map toPrimaryKey(result);
 			  
 	foreignKeys += self.map toForeignKeysN2N(result);
 }
 
 
-abstract mapping Property::toCommonForeignField(t : Table) : Field
+abstract mapping Property::toCommonForeignField(t : Table, s : String) : Field
 {
-	var pk := self.type![Class]->ownedAttribute->at(1).map toPrimaryKey();
-		
+	var pk := self.type![Class]->ownedAttribute->at(1).map toPrimaryKey(s);
 	name := pk.primaryFields->at(1).name;
-	type := pk.primaryFields->at(1).type;
+	type := pk.primaryFields->at(1).type;		
 }
 
-mapping Property::toForeignField(t : Table) : Field
+mapping Property::toForeignField(t : Table, s : String) : Field
 inherits Property::toCommonForeignField
 {
 	if (self.owner![Association].ownedEnd->at(1).upperBound() = 1
