@@ -23,7 +23,7 @@ The steps for generating the code :
 3. Choose in the tools menu : Custom generator.
 4. Add a new generator, complete the fields and save.
 
-![Generator menu](/docs/img/saveGenerator.png "Generator menu")
+![Generator menu](/docs/img/addGenerator.png "Generator menu")
 
 Now, you can launch the generation and download the code source.
 
