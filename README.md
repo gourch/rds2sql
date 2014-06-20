@@ -106,16 +106,16 @@ CREATE TABLE Company
 (
         nSiret VARCHAR(100) NOT NULL UNIQUE,
         name VARCHAR(100) NOT NULL UNIQUE,
-        creation DATE NOT NULL UNIQUE,
+        creation DATE NOT NULL ,
         PRIMARY KEY(nSiret)
 );
 
 CREATE TABLE Person
 (
         id INT NOT NULL UNIQUE,
-        name VARCHAR(100) NOT NULL UNIQUE,
-        adress VARCHAR(100) NOT NULL UNIQUE,
-        sex BOOLEAN NOT NULL UNIQUE,
+        name VARCHAR(100) NOT NULL ,
+        adress VARCHAR(100) NOT NULL ,
+        gender BOOLEAN NOT NULL ,
         PRIMARY KEY(id)
 );
 
