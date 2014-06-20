@@ -196,14 +196,15 @@ inherits Property::toCommonForeignField
 
 property typeMap : Dict(String,sql::Type) = 
 	Dict {
-        'Integer'	= sql::Type::int,
-        'Boolean'	= sql::Type::boolean,
-        'ByteArray'	= sql::Type::byteArray,
-        'Date'		= sql::Type::date,
-        'Long'		= sql::Type::bigInt,
-        'Real'		= sql::Type::double,
-        'String'	= sql::Type::varchar,
-        'Char'		= sql::Type::varchar
+        'Integer'			= sql::Type::int,
+        'Boolean'			= sql::Type::boolean,
+        'ByteArray'			= sql::Type::byteArray,
+        'Date'				= sql::Type::date,
+        'Long'				= sql::Type::bigInt,
+        'UnlimitedNatural'	= sql::Type::bigInt,
+        'Real'				= sql::Type::double,
+        'String'			= sql::Type::varchar,
+        'Char'				= sql::Type::varchar
     };
 
 query TypedElement::translate() : sql::Type
