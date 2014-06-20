@@ -10,7 +10,7 @@ Here is the mapping which is applied to UML in order to produce the SQL code.
 
 | UML | SQL |
 | :-- | :-- |
-|Class | Table |
+|Class (abstract or not) | Table |
 |Attribute | Field |
 |Association | Relationship in the SQL sense (*i.e.*, a field and a foreign key + table in many to many cases) |
 |Multiplicity/cardinality | constraint on field and on foreign key location |
@@ -26,7 +26,8 @@ another Class.
 - If an attribute has an undefined type, it is not generated.
 - If an attribute has no name, it is not generated.
 - Association are managed according to their association end multiplicity.
-
+- Abstract classes are generated as tables.
+ 
 ## Known Limitations
 
 - Inheritance is not currently managed.
