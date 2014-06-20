@@ -32,6 +32,7 @@ another Class.
 
 - Inheritance is not currently managed.
 - Interface and Enumeration are not translated.
+- Comment are not currently supported.
 
 ## GenMyModel Integration
 
@@ -97,6 +98,41 @@ This is the last step. The `rds2sql.mtl` code generation translate the SQL Model
 in `52` lines. The number of lines had been drastically reduced by the previous QVTo transformation. As, at this last step,
 the model is already defined, we just have to translate it into code. No more intelligence is required.
 
-Here is an example of generated code (from this UML model TODO)
+Here is an example of generated code (from this UML model <https://www.genmymodel.com/repository/ali.gourch/Example>)
+
+```sql
+CREATE TABLE Company
+(
+        nSiret VARCHAR(100) NOT NULL UNIQUE,
+        name VARCHAR(100) NOT NULL UNIQUE,
+        creation DATE NOT NULL UNIQUE,
+        PRIMARY KEY(nSiret)
+);
+
+CREATE TABLE Person
+(
+        id INT NOT NULL UNIQUE,
+        name VARCHAR(100) NOT NULL UNIQUE,
+        adress VARCHAR(100) NOT NULL UNIQUE,
+        sex BOOLEAN NOT NULL UNIQUE,
+        PRIMARY KEY(id)
+);
+
+CREATE TABLE Company_Person
+(
+        company_nSiret VARCHAR(100),
+        person_id INT,
+        PRIMARY KEY(company_nSiret, person_id)
+);
+
+ALTER TABLE Company_Person
+        ADD CONSTRAINT company
+                FOREIGN KEY(company_nSiret)
+                        REFERENCES Company(nSiret); 
+ALTER TABLE Company_Person
+        ADD CONSTRAINT person
+                FOREIGN KEY(person_id)
+                        REFERENCES Person(id);
+```
      
-     TODO
+     
