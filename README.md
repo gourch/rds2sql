@@ -9,7 +9,7 @@ creation.
 Here is the mapping which is applied to UML in order to produce the SQL code.
 
 | UML | SQL |
-| :-: | :-: |
+| :-- | :-- |
 |Class | Table |
 |Attribute | Field |
 |Association | Relationship in the SQL sense (*i.e.*, a field and a foreign key + table in many to many cases) |
