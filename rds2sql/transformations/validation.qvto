@@ -1,0 +1,29 @@
+import genmymodel.qvto.ValidationLibrary;
+
+modeltype uml uses uml('http://www.eclipse.org/uml2/4.0.0/UML');
+modeltype sql uses genericsql('http://genericsql/1.0');
+modeltype validmod uses chainoption('http://chainoption/1.0');
+
+transformation validation(in umlModel : uml, inout valid : validmod);
+
+main() 
+{
+	umlModel.objects()[Property]->map notNullType();
+	umlModel.objects()[Property]->map notClassifierType();
+}
+
+mapping Property::notNullType()
+when {
+	self.type = null
+}
+{
+	valid.addWarning(self, "The type of "+self.qualifiedName+' is null. It will be not generated');
+}
+
+mapping Property::notClassifierType()
+when {
+	not (self.type = uml::PrimitiveType)
+}
+{
+	valid.addWarning(self, "The type of "+self.qualifiedName+' is not primitive. It will be not generated.');
+}

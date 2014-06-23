@@ -12,7 +12,7 @@ main()
 mapping inout Field::vendorType()
 disjuncts
 	Field::int,
-	Field::bigInt,
+	Field::bigIntOracle,
 	Field::boolean,
 	Field::byteArray,
 	Field::date,
@@ -53,7 +53,7 @@ when {
 	endif;
 }
 
-mapping inout Field::bigInt()
+mapping inout Field::bigIntOracle()
 when {
 	self.type = Type::bigInt
 }
