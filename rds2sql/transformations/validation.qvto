@@ -22,7 +22,7 @@ when {
 
 mapping Property::notClassifierType()
 when {
-	not (self.type = uml::PrimitiveType) and self.association = null
+	not self.type.oclIsKindOf(uml::PrimitiveType) and self.association = null
 }
 {
 	valid.addWarning(self, "The type of "+self.qualifiedName+' is not primitive. It will be not generated.');
