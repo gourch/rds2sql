@@ -14,7 +14,7 @@ main()
 
 mapping Property::notNullType()
 when {
-	self.type = null
+	self.type = null and self.association = null
 }
 {
 	valid.addWarning(self, "The type of "+self.qualifiedName+' is null. It will be not generated');
@@ -22,7 +22,7 @@ when {
 
 mapping Property::notClassifierType()
 when {
-	not (self.type = uml::PrimitiveType)
+	not (self.type = uml::PrimitiveType) and self.association = null
 }
 {
 	valid.addWarning(self, "The type of "+self.qualifiedName+' is not primitive. It will be not generated.');
