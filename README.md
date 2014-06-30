@@ -99,7 +99,7 @@ This is the last step. The `rds2sql.mtl` code generation translates the SQL Mode
 in `52` lines. The number of lines had been drastically reduced by the previous QVTo transformations. At this last step, as
 the model is already defined, we just have to translate it into code. No more intelligence is required.
 
-Here is an example of generated code (from this UML model <http://repository.genmymodel.com/ali.gourch/Example>)
+Here is an example of generated code (from this UML model <http://repository.genmymodel.com/ali.gourch/sqlExample>)
 
 ```sql
 CREATE TABLE Company
