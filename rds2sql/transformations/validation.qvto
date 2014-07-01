@@ -8,8 +8,25 @@ transformation validation(in umlModel : uml, inout valid : validmod);
 
 main() 
 {
+	umlModel.objects()[Class]->map notValidName();
+	umlModel.objects()[Property]->map notValidName();
 	umlModel.objects()[Property]->map notNullType();
 	umlModel.objects()[Property]->map notClassifierType();
+	umlModel.objects()[Class]->map notValidAssociation();
+	umlModel.objects()[Package]->map notValid();
+	umlModel.objects()[Interface]->map notValid();
+	umlModel.objects()[DataType]->map notValid();
+	umlModel.objects()[Enumeration]->map notValid();
+	umlModel.objects()[Class]->map noAttribute();
+	umlModel.objects()[Class]->map notValidAttribute();
+}
+
+mapping NamedElement::notValidName()
+when {
+	self.name = null or self.name = '' or (not self.name.match(' *([a-zA-Z0-9_.]+)'))
+}
+{
+	valid.addWarning(self, "The name of "+self.qualifiedName+' is invalid. It will not be generated');
 }
 
 mapping Property::notNullType()
@@ -17,7 +34,7 @@ when {
 	self.type = null and self.association = null
 }
 {
-	valid.addWarning(self, "The type of "+self.qualifiedName+' is null. It will be not generated');
+	valid.addWarning(self, "The type of "+self.qualifiedName+' is null. It will not be generated');
 }
 
 mapping Property::notClassifierType()
@@ -25,5 +42,65 @@ when {
 	not self.type.oclIsKindOf(uml::PrimitiveType) and self.association = null
 }
 {
-	valid.addWarning(self, "The type of "+self.qualifiedName+' is not primitive. It will be not generated.');
+	valid.addWarning(self, "The type of "+self.qualifiedName+' is not primitive. It will not be generated.');
+}
+
+mapping Class::notValidAssociation()
+when {
+	not (self.getAssociations().endType->select(oclIsKindOf(Interface) or oclIsKindOf(DataType))->isEmpty())
+}
+{
+	self.getAssociations().map notValidAssociation();
+}
+
+mapping Association::notValidAssociation()
+when {
+	not (self.endType->select(oclIsKindOf(Interface) or oclIsKindOf(DataType))->isEmpty())
+}
+{
+	valid.addError(self, "The association "+self.name+" will not be generated.");
+}
+
+mapping Package::notValid()
+when {
+	not self.oclIsKindOf(uml::Model)
+}
+{
+	valid.addWarning(self, "The " +self.qualifiedName+" will not be generated.");
+}
+
+mapping Interface::notValid()
+{
+	valid.addWarning(self, "The " +self.qualifiedName+" will not be generated.");
+}
+
+mapping DataType::notValid()
+{
+	valid.addWarning(self, "The " +self.qualifiedName+" will not be generated.");
+}
+
+mapping Enumeration::notValid()
+{
+	valid.addWarning(self, "The " +self.qualifiedName+" will not be generated.");
+}
+
+mapping Class::noAttribute()
+when
+{
+	(not (self.getAssociations().endType->select(oclIsKindOf(Class))->isEmpty())) and self.attribute->isEmpty()
+}
+{
+	valid.addError(self, "At least one valid attribute is required on " +self.qualifiedName+".");
+}
+
+mapping Class::notValidAttribute()
+when
+{
+	(not (self.getAssociations().endType->select(oclIsKindOf(Class))->isEmpty()))
+	 and ((not self.attribute.name->at(1).match(' *([a-zA-Z0-9_.]+)'))
+	  or self.attribute.type->at(1).name.equalsIgnoreCase('Boolean')
+	  or self.attribute.type->at(1).name.equalsIgnoreCase('ByteArray'))
+}
+{
+	valid.addError(self, "Name or type of the first attribute on " +self.qualifiedName+" is not valid.");
 }
