@@ -99,23 +99,23 @@ This is the last step. The `rds2sql.mtl` code generation translates the SQL Mode
 in `52` lines. The number of lines had been drastically reduced by the previous QVTo transformations. At this last step, as
 the model is already defined, we just have to translate it into code. No more intelligence is required.
 
-Here is an example of generated code (from this UML model <http://repository.genmymodel.com/ali.gourch/Example>)
+Here is an example of generated code (from this UML model <http://repository.genmymodel.com/ali.gourch/sqlExample>)
 
 ```sql
 CREATE TABLE Company
 (
         nSiret VARCHAR(100) NOT NULL UNIQUE,
         name VARCHAR(100) NOT NULL UNIQUE,
-        creation DATE NOT NULL UNIQUE,
+        creation DATE NOT NULL,
         PRIMARY KEY(nSiret)
 );
 
 CREATE TABLE Person
 (
         id INT NOT NULL UNIQUE,
-        name VARCHAR(100) NOT NULL UNIQUE,
-        adress VARCHAR(100) NOT NULL UNIQUE,
-        sex BOOLEAN NOT NULL UNIQUE,
+        name VARCHAR(100) NOT NULL,
+        adress VARCHAR(100) NOT NULL,
+        gender BOOLEAN NOT NULL,
         PRIMARY KEY(id)
 );
 
