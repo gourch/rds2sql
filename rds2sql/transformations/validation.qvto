@@ -99,7 +99,8 @@ when
 	(not (self.getAssociations().endType->select(oclIsKindOf(Class))->isEmpty()))
 	 and ((not self.attribute.name->at(1).match(' *([a-zA-Z0-9_.]+)'))
 	  or self.attribute.type->at(1).name.equalsIgnoreCase('Boolean')
-	  or self.attribute.type->at(1).name.equalsIgnoreCase('ByteArray'))
+	  or self.attribute.type->at(1).name.equalsIgnoreCase('ByteArray')
+	  or self.attribute.type->at(1) = null)
 }
 {
 	valid.addError(self, "Name or type of the first attribute on " +self.qualifiedName+" is not valid.");
